@@ -1,5 +1,5 @@
 # DI3TextureNames
-List of all the texture names used on all the mtb files.  
+List of all the texture names used on all the mtb files (GOLD version).  
 
 ## How to use
 
