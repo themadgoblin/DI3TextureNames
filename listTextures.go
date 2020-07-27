@@ -41,7 +41,20 @@ func main() {
     data = readNextBytes(file, 4)
     numberOfTextures := int(data[0])
     data = readNextBytes(file, 4)
-    println("DEBUG: Number of textures found on the mtb file:" + strconv.Itoa(numberOfTextures)) // Ugly hack: using just the first byte to get the number of textures
+    internalTextureNameLength := int(data[0])
+
+    if internalTextureNameLength>0 {
+    internalTextureName := readNextBytes(file, internalTextureNameLength)
+
+    println("DEBUG: Internal texture name: " + string(internalTextureName[:]))
+	    for int(readNextBytes(file, 1)[0])==0 {
+		println("DEBUG: 00 found")
+            }
+    file.Seek(-1, os.SEEK_CUR)  
+
+    }
+
+    println("DEBUG: Number of textures found on the mtb file:" + strconv.Itoa(numberOfTextures)) // Ugly hack: using just the first byte to get the number of textures... lets hope there isnt a case of more than 255...
     for i := 1; i <= int(numberOfTextures); i++ {
 
       textureName := readNextBytes(file, 8)
